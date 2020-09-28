@@ -1,6 +1,7 @@
 import os, sys, time, glob
 from flask import Flask, request
-from BotModules import *
+from BotModules import module_fakenews
+import json
 
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
@@ -28,22 +29,35 @@ def sms_reply():
 
 - [ *!help* ] Bot usage Instructions
 - [ *!text* ] Checks Text News
-- [ *!url* ] Check News Link
-- [ *!report* ] Report Fake News/Link  
+- [ *!url* ] Check News Link 
 - [ *!alerts* ] Police Fake News Alerts 
-- [ *!trends* ] Fake News Trends 
 - [ *!contact* ] Contct Team
 
  TYPE *!help* to get usage examples and information.''')
         return str(resp)
     if '!text' in msg:
-    	news = msg.replace('Check ','')
-    	news = news.lower()
-    	news = ('"'+news+'"')
-    	print(news)
-    	contents = 'Your Number: ' + num + ' Your Query: ' + msg + '\nResult: ' + ' Model under construction'
-    	#final = module_fakenews.run(str(news))
-    	#print(final)
+        news = msg.replace('!text ','')
+        news = news.lower()
+        print(news)
+        final = module_fakenews.run(str(news),str(news), "")
+        print(final)
+        final = json.loads(final)
+        print(final["content"]["decision"])
+        print(final["content"]["score"])
+        print(final["title"]["decision"])
+        print(final["title"]["score"])
+        model_decisions = final["title"]["decision"] + ', ' +final["content"]["decision"]
+
+        accuracy = max(final["content"]["score"], final["title"]["score"])
+        print(accuracy)
+        accuracy_rounded = round(accuracy, 2)
+        print(accuracy_rounded) 
+        if accuracy_rounded >= 0.8:
+            final_result = "The information is probably true"
+        elif accuracy_rounded <= 0.1:
+            final_result = "The information is probably fake"
+        else:
+            final_result = "Need more information, Unsure" 
     	#contents = final
     	#resp.message("Checking ....")
     	#message = client.messages.create(body= '*CHECKING...*',from_='whatsapp:+14155238886',to= ('whatsapp:'+'+919052021756'))
@@ -53,8 +67,9 @@ def sms_reply():
     	#print(contents)
     	#f1.close()
     	#resp.message(contents)
-    	message = client.messages.create(body=contents,from_='whatsapp:+14155238886',to= num)
-    	return str(resp)
+        contents = 'Your Query: ' + news + '\nResult: ' + final_result + '\nAccuracy: ' + str(accuracy_rounded*100) +'%' + '\nModel Decisions: ' + model_decisions
+        message = client.messages.create(body=contents,from_='whatsapp:+14155238886',to= num)
+        return str(resp)
     elif 'Dev' == msg:
         message = client.messages.create(body = 'Anonymous',from_='whatsapp:+14155238886',to= num)
         return str(resp)
@@ -75,21 +90,11 @@ def sms_reply():
    Example: !url https://www.cnn.com/2020/09/23/asia/china-india-border-troop-agreement-intl-hnk/index.html.
    Output: Sends a text response where the input information is fake or not.
 
-4) Command: !report
-   Description: Reports fake information or online news article link to relevant authorities. The input should be the news article link or text.
-   Example: !report https://www.cnn.com/2020/09/23/asia/china-india-border-troop-agreement-intl-hnk/index.html.
-   Example: !report Modi is giving free laptop to every student in the country.
-   Output: Sends an acknowledgment message.
-
-5) Command: !alerts
+4) Command: !alerts
    Description: Receive alerts directly from police authorities.
    Output: Sends important alerts from police authorities.
 
-6) Command: !trends
-   Description: Shows information of trending fake news.
-   Output: Sends trending fake news articles/links for awareness.
-
-7) Command: !contact
+5) Command: !contact
    Description: Contact authorities/team to get help.
    Output: Sends contact information.
 
