@@ -1,0 +1,389 @@
+{% extends "base-site.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+{% block content %}
+
+  <div class="my-3 my-md-5">
+
+      <div class="container">
+
+        <div class="page-header">
+          <h1 class="page-title">
+            Dashboard
+          </h1>
+        </div>
+
+        <div class="row row-cards">
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="card">
+              <div class="card-body p-3 text-center">
+                <div class="text-right text-green">
+                  6%
+                  <i class="fe fe-chevron-up"></i>
+                </div>
+                <div class="h1 m-0">43</div>
+                <div class="text-muted mb-4">All Requests</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="card">
+              <div class="card-body p-3 text-center">
+                <div class="text-right text-red">
+                  -3%
+                  <i class="fe fe-chevron-down"></i>
+                </div>
+                <div class="h1 m-0">17</div>
+                <div class="text-muted mb-4">Today Requests</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="card">
+              <div class="card-body p-3 text-center">
+                <div class="text-right text-green">
+                  9%
+                  <i class="fe fe-chevron-up"></i>
+                </div>
+                <div class="h1 m-0">7</div>
+                <div class="text-muted mb-4">True News</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="card">
+              <div class="card-body p-3 text-center">
+                <div class="text-right text-green">
+                  3%
+                  <i class="fe fe-chevron-up"></i>
+                </div>
+                <div class="h1 m-0">27</div>
+                <div class="text-muted mb-4">Fake News</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="card">
+              <div class="card-body p-3 text-center">
+                <div class="text-right text-red">
+                  -2%
+                  <i class="fe fe-chevron-down"></i>
+                </div>
+                <div class="h1 m-0">95</div>
+                <div class="text-muted mb-4">API Requests</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-sm-4 col-lg-2">
+            <div class="card">
+              <div class="card-body p-3 text-center">
+                <div class="text-right text-red">
+                  -1%
+                  <i class="fe fe-chevron-down"></i>
+                </div>
+                <div class="h1 m-0">621</div>
+                <div class="text-muted mb-4">Total Users</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Bot Live Activity</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table card-table table-striped table-vcenter">
+                  <thead>
+                    <tr>
+                      <th colspan="2">Number</th>
+                      <th>Query</th>
+                      <th>Date</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="w-1"><span class="avatar" style="background-image: url(/static/assets/demo/faces/male/9.jpg)"></span></td>
+                      <td>+919398584586</td>
+                      <td>Virat Kohli is india captian</td>
+                      <td class="text-nowrap">Sep 29, 2020</td>
+                      <td class="w-1"><a href="#" class="icon"><i class="fe fe-trash"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td class="w-1"><span class="avatar" style="background-image: url(/static/assets/demo/faces/male/9.jpg)"></span></td>
+                      <td>+919398584586</td>
+                      <td>Virat Kohli is india captian</td>
+                      <td class="text-nowrap">Sep 29, 2020</td>
+                      <td class="w-1"><a href="#" class="icon"><i class="fe fe-trash"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td class="w-1"><span class="avatar" style="background-image: url(/static/assets/demo/faces/male/9.jpg)"></span></td>
+                      <td>+919398584586</td>
+                      <td>Virat Kohli is india captian</td>
+                      <td class="text-nowrap">Sep 29, 2020</td>
+                      <td class="w-1"><a href="#" class="icon"><i class="fe fe-trash"></i></a></td>
+                    </tr>
+                    <tr>
+                      <td class="w-1"><span class="avatar" style="background-image: url(/static/assets/demo/faces/male/9.jpg)"></span></td>
+                      <td>+919398584586</td>
+                      <td>Virat Kohli is india captian</td>
+                      <td class="text-nowrap">Sep 29, 2020</td>
+                      <td class="w-1"><a href="#" class="icon"><i class="fe fe-trash"></i></a></td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+           
+           
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Results Chart</h3>
+                  </div>
+                  <div class="card-body">
+                    <div id="chart-donut" style="height: 12rem;"></div>
+                  </div>
+                </div>
+                <script>
+                  require(['c3', 'jquery'], function(c3, $) {
+                    $(document).ready(function(){
+                      var chart = c3.generate({
+                        bindto: '#chart-donut', // id of chart wrapper
+                        data: {
+                          columns: [
+                              // each columns data
+                            ['data1', 83],
+                            ['data2', 17]
+                          ],
+                          type: 'donut', // default type of chart
+                          colors: {
+                            'data1': tabler.colors["green"],
+                            'data2': tabler.colors["red"]
+                          },
+                          names: {
+                              // name of each serie
+                            'data1': 'True News',
+                            'data2': 'Fake News'
+                          }
+                        },
+                        axis: {
+                        },
+                        legend: {
+                                  show: false, //hide legend
+                        },
+                        padding: {
+                          bottom: 0,
+                          top: 0
+                        },
+                      });
+                    });
+                  });
+                </script>
+              </div>
+              <div class="col-sm-6">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Sources Chart</h3>
+                  </div>
+                  <div class="card-body">
+                    <div id="chart-pie" style="height: 12rem;"></div>
+                  </div>
+                </div>
+                <script>
+                  require(['c3', 'jquery'], function(c3, $) {
+                    $(document).ready(function(){
+                      var chart = c3.generate({
+                        bindto: '#chart-pie', // id of chart wrapper
+                        data: {
+                          columns: [
+                              // each columns data
+                            ['data1', 63],
+                            ['data2', 44],
+                            ['data3', 12],
+                            ['data4', 14]
+                          ],
+                          type: 'pie', // default type of chart
+                          colors: {
+                            'data1': tabler.colors["blue-darker"],
+                            'data2': tabler.colors["blue"],
+                            'data3': tabler.colors["blue-light"],
+                            'data4': tabler.colors["blue-lighter"]
+                          },
+                          names: {
+                              // name of each serie
+                            'data1': 'timesindia.com',
+                            'data2': 'news.google.com',
+                            'data3': 'opindia.com',
+                            'data4': 'reddit.com'
+                          }
+                        },
+                        axis: {
+                        },
+                        legend: {
+                                  show: false, //hide legend
+                        },
+                        padding: {
+                          bottom: 0,
+                          top: 0
+                        },
+                      });
+                    });
+                  });
+                </script>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="row row-cards row-deck">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Reports</h3>
+              </div>
+              <div class="table-responsive">
+                <table class="table card-table table-vcenter text-nowrap datatable">
+                  <thead>
+                    <tr>
+                      <th class="w-1">ID.</th>
+                      <th>Role</th>
+                      <th>Query</th>
+                      <th>Mobile No.</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Result</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><span class="text-muted">1</span></td>
+                      <td><a href="#" class="text-inherit">User</a></td>
+                      <td>
+                        India is the second largest population in the world.
+                      </td>
+                      <td>
+                        +9398584586
+                      </td>
+                      <td>
+                        15 Sep 2020
+                      </td>
+                      <td>
+                        <span class="status-icon bg-success"></span> Done
+                      </td>
+                      <td>True</td>
+                      <td class="text-right">
+                        <a href="javascript:void(0)" class="btn btn-secondary btn-sm">JSON Output</a>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                        </div>
+                      </td>
+                      <td>
+                        <a class="icon" href="javascript:void(0)">
+                          <i class="fe fe-edit"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><span class="text-muted">2</span></td>
+                      <td><a href="#" class="text-inherit">User</a></td>
+                      <td>
+                        India is the second largest population in the world.
+                      </td>
+                      <td>
+                        +9398584586
+                      </td>
+                      <td>
+                        15 Sep 2020
+                      </td>
+                      <td>
+                        <span class="status-icon bg-success"></span> Done
+                      </td>
+                      <td>True</td>
+                      <td class="text-right">
+                        <a href="javascript:void(0)" class="btn btn-secondary btn-sm">JSON Output</a>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown">Actions</button>
+                        </div>
+                      </td>
+                      <td>
+                        <a class="icon" href="javascript:void(0)">
+                          <i class="fe fe-edit"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+                <script>
+                  require(['datatables', 'jquery'], function(datatable, $) {
+                        $('.datatable').DataTable();
+                      });
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    </div>
+
+   
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script>
+    require(['jquery'], function () {
+      $(document).ready(function () {
+    
+        function setCookie(name,value,days) {
+          var expires = "";
+          if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+          }
+          document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+        }
+    
+        function getCookie(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+          }
+          return null;
+        }
+    
+        if (!getCookie('bottombar-hidden')) {
+          $('.js-bottombar').show();
+        }
+    
+        $('.js-bottombar-close').on('click', function (e) {
+          $('.js-bottombar').hide();
+          setCookie('bottombar-hidden', 1, 7);
+    
+          e.preventDefault();
+          return false;
+        });
+      });
+    });
+  </script>
+
+{% endblock javascripts %}
