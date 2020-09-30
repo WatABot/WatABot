@@ -72,7 +72,7 @@ def sms_reply():
         message = client.messages.create(body=contents,from_='whatsapp:+14155238886',to= num)
         return str(resp)
     elif '!contact' == msg:
-        message = client.messages.create(body = 'Created by CyberBots Team @ Assam Police Hackathon',from_='whatsapp:+14155238886',to= num)
+        message = client.messages.create(body = 'Created by CyberBots Team @ Assam Police Hackathon. \n*Team:* Kiran Babu Muddam, Sumit Sah, Kaustubh Sharma, Nisarg shah',from_='whatsapp:+14155238886',to= num)
         return str(resp)
     elif '!help' in msg:
         resp.message(''' 
