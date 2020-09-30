@@ -35,6 +35,7 @@ A Whatsapp buisness bot using Twillio API and flask server. The bot can include 
 - nltk;
 - keras
 - tensorflow
+- twillo API token
 ## Installing and running
 ```bash
 git clone https://github.com/WatABot/WatABot/
@@ -42,3 +43,9 @@ cd WatABot
 pip3 install -r requirements.txt
 python3 run.py
 ```
+---
+**NOTE**
+You need to get a Twillo API token, for the whatsapp bot to work. 
+Add your token in `https://github.com/WatABot/WatABot/blob/master/twilio-token.txt` file
+
+---
