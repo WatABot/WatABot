@@ -27,3 +27,17 @@
 ## Introduction
 
 A Whatsapp buisness bot using Twillio API and flask server. The bot can include multiple python scripts/modules and generate output which can be sent via twilio API.
+## Local Setup
+### Requirements
+- Python >=3.6;
+- flask
+- pandas;
+- nltk;
+- keras
+- tensorflow
+## Installing and running
+
+git clone https://github.com/WatABot/WatABot/
+cd WatABot
+pip3 install -r requirements.txt
+python3 run.py
