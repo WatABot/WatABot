@@ -6,6 +6,7 @@ from app import create_app, db
 import os, sys, time, glob
 from flask import *
 from BotModules import module_fakenews
+from BotModules import module_newslink
 import json
 import sqlite3 as sql
 from twilio.rest import Client
@@ -76,11 +77,45 @@ def sms_reply():
             final_result = "Fake Information"
         else:
             final_result = "Unsure" 
+        if len(news) > 100:
+            news = news[0:99] + '....'
         contents = 'Your Query: ' + news + '\nResult: ' + final_result + '\nAccuracy: ' + str(round(accuracy_rounded*100, 2)) +'%'
         message = client.messages.create(body=contents,from_='whatsapp:+14155238886',to= num)
         with sql.connect("database.db") as con:
             cur = con.cursor()
             con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, news, str(round(accuracy_rounded*100, 2)) +'%', final_result, today_date))
+            con.commit()
+            print("Query Executed successfully")
+        return str(resp)
+
+    if '!link' in msg:
+        news = msg.replace('!link ','')
+        link = news
+        
+        if 'http' not in news:
+            message = client.messages.create(body="Link is not valid",from_='whatsapp:+14155238886',to= num)
+            return str(resp)
+        print(news)
+        news = module_newslink.scrape_article(news)
+        final = module_fakenews.run(str(news))
+        print(final)
+        accuracy = final[0][1]
+        print(accuracy)
+        accuracy_rounded = round(accuracy, 2)
+        print(accuracy_rounded) 
+        if accuracy_rounded >= 0.8:
+            final_result = "True Information"
+        elif accuracy_rounded <= 0.2:
+            final_result = "Fake Information"
+        else:
+            final_result = "Unsure" 
+        if len(news) > 100:
+            news = news[0:99] + '....'
+        contents = 'Your Query: ' + link + '\nResult: ' + final_result + '\nAccuracy: ' + str(round(accuracy_rounded*100, 2)) +'%'
+        message = client.messages.create(body=contents,from_='whatsapp:+14155238886',to= num)
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, link + '\n' + news, str(round(accuracy_rounded*100, 2)) +'%', final_result, today_date))
             con.commit()
             print("Query Executed successfully")
         return str(resp)
