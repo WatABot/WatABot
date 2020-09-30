@@ -1,22 +1,25 @@
 from flask_migrate import Migrate
 from os import environ
 from sys import exit
-
 from config import config_dict
 from app import create_app, db
-
 import os, sys, time, glob
 from flask import *
 from BotModules import module_fakenews
 import json
-
+import sqlite3 as sql
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
+from datetime import date
+
+today_date = date.today()
 
 account_sid = 'DEFAULT'
 auth_token = 'DEFAULT'
 
 get_config_mode = environ.get('APPSEED_CONFIG_MODE', 'Debug')
+#conn = sql.connect('database.db', check_same_thread=False)
+print("Opened database successfully")
 
 try:
     config_mode = config_dict[get_config_mode.capitalize()]
@@ -41,6 +44,11 @@ def sms_reply():
         return str(resp)
         return str(resp)
     while msg in ['info','INFO','Info']:
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Bot Commands', today_date))
+            con.commit()
+            print("Query Executed successfully")
         resp.message(''' 
 *ℹ️ Fake News Detection/Reporting Tool*
 
@@ -63,18 +71,33 @@ def sms_reply():
         accuracy_rounded = round(accuracy, 2)
         print(accuracy_rounded) 
         if accuracy_rounded >= 0.8:
-            final_result = "The information is probably true"
+            final_result = "True Information"
         elif accuracy_rounded <= 0.2:
-            final_result = "The information is probably fake"
+            final_result = "Fake Information"
         else:
-            final_result = "Need more information, Unsure" 
+            final_result = "Unsure" 
         contents = 'Your Query: ' + news + '\nResult: ' + final_result + '\nAccuracy: ' + str(round(accuracy_rounded*100, 2)) +'%'
         message = client.messages.create(body=contents,from_='whatsapp:+14155238886',to= num)
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, news, str(round(accuracy_rounded*100, 2)) +'%', final_result, today_date))
+            con.commit()
+            print("Query Executed successfully")
         return str(resp)
     elif '!contact' == msg:
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Contact Details', today_date))
+            con.commit()
+            print("Query Executed successfully")
         message = client.messages.create(body = 'Created by CyberBots Team @ Assam Police Hackathon. \n*Team:* Kiran Babu Muddam, Sumit Sah, Kaustubh Sharma, Nisarg shah',from_='whatsapp:+14155238886',to= num)
         return str(resp)
     elif '!help' in msg:
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Usage Details', today_date))
+            con.commit()
+            print("Query Executed successfully")
         resp.message(''' 
 *ℹ️ Bot Usage Instructions & Guide*
 
@@ -102,8 +125,13 @@ def sms_reply():
 ''')
         return str(resp)
     else:
-       message = client.messages.create(body = 'Invalid Input, enter !help for commands',from_='whatsapp:+14155238886',to= num)
-       return str(resp)
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Invalid Command', today_date))
+            con.commit()
+            print("Query Executed successfully")
+        message = client.messages.create(body = 'Invalid Input, enter !help for commands',from_='whatsapp:+14155238886',to= num)
+        return str(resp)
 
 def load_token():
     try:

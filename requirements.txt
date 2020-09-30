@@ -19,5 +19,4 @@ tensorflow
 keras
 nltk
 newspaper3k
-
-
+sqlite3
