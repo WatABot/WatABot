@@ -43,9 +43,6 @@ cd WatABot
 pip3 install -r requirements.txt
 python3 run.py
 ```
----
-**NOTE**
+> **_NOTE:_** 
 You need to get a Twillo API token, for the whatsapp bot to work. 
 Add your token in `https://github.com/WatABot/WatABot/blob/master/twilio-token.txt` file
-
----
