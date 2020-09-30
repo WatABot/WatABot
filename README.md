@@ -43,7 +43,7 @@ cd WatABot
 pip3 install -r requirements.txt
 python3 run.py
 ```
-For further documentation refer to : [Documentation!] (https://github.com/WatABot/WatABot/blob/master/Assam%20Police%20Hackathon%20Documentaion.pdf)
+For further documentation refer to : [Documentation!](https://github.com/WatABot/WatABot/blob/master/Assam%20Police%20Hackathon%20Documentaion.pdf)
 > **_NOTE:_** 
 You need to get a Twillo API token, for the whatsapp bot to work. 
 Add your token in `https://github.com/WatABot/WatABot/blob/master/twilio-token.txt` file
