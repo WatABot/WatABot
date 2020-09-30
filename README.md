@@ -36,8 +36,9 @@ A Whatsapp buisness bot using Twillio API and flask server. The bot can include 
 - keras
 - tensorflow
 ## Installing and running
-
+```bash
 git clone https://github.com/WatABot/WatABot/
 cd WatABot
 pip3 install -r requirements.txt
 python3 run.py
+```
