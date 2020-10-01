@@ -43,6 +43,38 @@ cd WatABot
 pip3 install -r requirements.txt
 python3 run.py
 ```
+
+### Using Twillo Whatsapp Bot
+```
+Add this no to your contacts: +14155238886 
+Message "  join apart-then "
+Then Type "Hi"
+```
+``` 
+ℹ️ Bot Usage Instructions & Guide
+
+1) Command: !help
+   Description: Provides information on how to use the bot with examples.
+
+2) Command: !text
+   Description: Checks whether an whatsapp forward or online information is fake or not. The input should be in text format.
+   Example: !check Virat Kohli is the captain of team india cricket team.
+   Output: Sends a text response where the input information is fake or not.
+
+3) Command: !link
+   Description: Checks where an online news article is fake or not. The input should be the news article link.
+   Example: !link https://www.cnn.com/2020/09/23/asia/china-india-border-troop-agreement-intl-hnk/index.html.
+   Output: Sends a text response where the input information is fake or not.
+
+4) Command: !alerts
+   Description: Receive alerts directly from police authorities.
+   Output: Sends important alerts from police authorities.
+
+5) Command: !contact
+   Description: Contact authorities/team to get help.
+   Output: Sends contact information.
+```
+
 For further documentation refer to : [Documentation!](https://github.com/WatABot/WatABot/blob/master/Assam%20Police%20Hackathon%20Documentaion.pdf)
 > **_NOTE:_** 
 You need to get a Twillo API token, for the whatsapp bot to work. 
