@@ -13,8 +13,6 @@ from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 from datetime import date
 
-today_date = date.today()
-
 account_sid = 'DEFAULT'
 auth_token = 'DEFAULT'
 
@@ -33,6 +31,7 @@ Migrate(app, db)
 @app.route("/sms", methods=['POST'])
 
 def sms_reply():
+    today_date = date.today()
     msg = request.form.get('Body')
     num = request.form.get('From')
     global url
@@ -55,7 +54,7 @@ def sms_reply():
 
 - [ *!help* ] Bot usage Instructions
 - [ *!text* ] Checks Text News
-- [ *!url* ] Check News Link 
+- [ *!link* ] Check News Link 
 - [ *!alerts* ] Police Fake News Alerts 
 - [ *!contact* ] Contct Team
 
@@ -144,9 +143,9 @@ def sms_reply():
    Example: !check Virat Kohli is the captain of team india cricket team.
    Output: Sends a text response where the input information is fake or not.
 
-3) Command: !url
+3) Command: !link
    Description: Checks where an online news article is fake or not. The input should be the news article link.
-   Example: !url https://www.cnn.com/2020/09/23/asia/china-india-border-troop-agreement-intl-hnk/index.html.
+   Example: !link https://www.cnn.com/2020/09/23/asia/china-india-border-troop-agreement-intl-hnk/index.html.
    Output: Sends a text response where the input information is fake or not.
 
 4) Command: !alerts
