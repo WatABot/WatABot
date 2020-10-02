@@ -64,7 +64,7 @@ def index():
     counts.append(mobile_count)
     counts.append(len(unsure_reports))
 
-    return render_template('index.html', all_reports = all_reports, today_reports = today_reports, true_reports = true_reports, fake_reports = fake_reports, all_count = counts)
+    return render_template('index.html', all_reports = all_reports, today_reports = today_reports, true_reports = true_reports, fake_reports = fake_reports, all_count = counts, unsure_reports = unsure_reports)
 
 @blueprint.route('/<template>')
 def route_template(template):
