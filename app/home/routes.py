@@ -14,13 +14,11 @@ import sqlite3 as sql
 import config
 from datetime import date
 
-today_date = date.today()
 
 @blueprint.route('/index')
 @login_required
 def index():
-    #basedir = os.path.abspath(os.path.dirname(__file__))
-    #print(basedir)
+    today_date = date.today()
     basedir = config.Config.basedir 
     dbpath = os.path.join(basedir, 'database.db')
     print(dbpath)
