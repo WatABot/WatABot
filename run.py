@@ -5,20 +5,18 @@ from config import config_dict
 from app import create_app, db
 import os, sys, time, glob
 from flask import *
-from BotModules import module_fakenews
-from BotModules import module_newslink
 import json
 import sqlite3 as sql
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 from datetime import date
+from BotModules import module_fakenews
+from BotModules import module_newslink
 
 account_sid = 'DEFAULT'
 auth_token = 'DEFAULT'
 
 get_config_mode = environ.get('APPSEED_CONFIG_MODE', 'Debug')
-#conn = sql.connect('database.db', check_same_thread=False)
-print("Opened database successfully")
 
 try:
     config_mode = config_dict[get_config_mode.capitalize()]
@@ -136,7 +134,7 @@ def sms_reply():
 *ℹ️ Bot Usage Instructions & Guide*
 
 1) Command: !help
-   Description: Provides information on how to use the bot with examples.
+   Description: Provides usage guidelines of the bot with examples.
 
 2) Command: !text
    Description: Checks whether an whatsapp forward or online information is fake or not. The input should be in text format.
@@ -164,7 +162,7 @@ def sms_reply():
             con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Invalid Command', today_date))
             con.commit()
             print("Query Executed successfully")
-        message = client.messages.create(body = 'Invalid Input, enter !help for commands',from_='whatsapp:+14155238886',to= num)
+        message = client.messages.create(body = 'Invalid Input, enter !help for commands',from_='whatsapp:+14155238886',to = num)
         return str(resp)
 
 def load_token():
@@ -182,4 +180,4 @@ def load_token():
 
 if __name__ == "__main__":
     load_token()
-    app.run(debug=True,host='10.0.0.4',port=80, threaded=True)
+    app.run(debug=True,host='0.0.0.0',port=80, threaded=True)
