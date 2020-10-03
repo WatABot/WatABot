@@ -38,7 +38,7 @@ def sms_reply():
     client = Client(account_sid, auth_token)
     resp = MessagingResponse()
     while msg in ['start','Start', 'run', 'Run', 'HI', 'hi', 'Hai', 'Hello', 'hello', 'Hi']:
-        message = client.messages.create(body = '''*A hackathon initiative by Assam Police to tackle fake news. Type info to show usage instructions.* ''',media_url= 'https://cdn.skillenza.com/files/325bad70-29b8-42c4-814c-637bec29f277/AssamPolice_logo.png',from_='whatsapp:+14155238886',to=num)
+        message = client.messages.create(body = '''*A hackathon initiative by Assam Police to tackle fake news. Type *info* to show bot usage instructions.* ''',media_url= 'https://cdn.skillenza.com/files/325bad70-29b8-42c4-814c-637bec29f277/AssamPolice_logo.png',from_='whatsapp: +14155238886',to = num)
         return str(resp)
         return str(resp)
     while msg in ['info','INFO','Info']:
@@ -123,6 +123,14 @@ def sms_reply():
             con.commit()
             print("Query Executed successfully")
         message = client.messages.create(body = 'Created by CyberBots Team @ Assam Police Hackathon. \n*Team:* Kiran Babu Muddam, Sumit Sah, Kaustubh Sharma, Nisarg shah',from_='whatsapp:+14155238886',to= num)
+        return str(resp)
+    elif '!alerts' == msg:
+        with sql.connect("database.db") as con:
+            cur = con.cursor()
+            con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Alert Results', today_date))
+            con.commit()
+            print("Query Executed successfully")
+        message = client.messages.create(body = 'Alerts feature is currently under development. Please check later.',from_='whatsapp:+14155238886',to = num)
         return str(resp)
     elif '!help' in msg:
         with sql.connect("database.db") as con:
