@@ -248,7 +248,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Reports</h3>
+                <h3 class="card-title">All Reports</h3>
               </div>
               <div class="table-responsive">
                 <table class="table card-table table-vcenter text-nowrap datatable">
@@ -270,7 +270,7 @@
                     <tr>
                       {%for i in range(0, all_count[0])%} 
 
-                      <td><span class="text-muted">1</span></td>
+                      <td><span class="text-muted">{{ all_reports[i][0] }}</span></td>
                       <td><a href="#" class="text-inherit">User</a></td>
                       <td>
                        {{ all_reports[i][1] }}
