@@ -21,7 +21,6 @@ def index():
     today_date = date.today()
     basedir = config.Config.basedir 
     dbpath = os.path.join(basedir, 'database.db')
-    print(dbpath)
     con = sql.connect(dbpath)
     print("Database successfully opened")
     con.row_factory = sql.Row
@@ -50,6 +49,12 @@ def index():
     mobile_count = cur.execute("SELECT COUNT(DISTINCT mobile) from reports")
     mobile_count = cur.fetchone()[0]
     print(mobile_count)
+
+    cur.execute("select * from reports where accuracy = 'Not Applicable'")
+    invalid_reports = cur.fetchall()
+    print(len(invalid_reports))
+
+
     
     
     #if not current_user.is_authenticated:
@@ -64,7 +69,7 @@ def index():
     counts.append(mobile_count)
     counts.append(len(unsure_reports))
 
-    return render_template('index.html', all_reports = all_reports, today_reports = today_reports, true_reports = true_reports, fake_reports = fake_reports, all_count = counts, unsure_reports = unsure_reports)
+    return render_template('index.html', all_reports = all_reports, today_reports = today_reports, true_reports = true_reports, fake_reports = fake_reports, all_count = counts, unsure_reports = unsure_reports, invalid_reports = invalid_reports)
 
 @blueprint.route('/<template>')
 def route_template(template):
