@@ -36,6 +36,7 @@ A Whatsapp buisness bot using Twillio API and flask server. The bot can include 
 - keras
 - tensorflow
 - twillo API token
+
 ## Installing and running
 ```bash
 git clone https://github.com/WatABot/WatABot/
@@ -47,7 +48,7 @@ python3 run.py
 ### Using Twillo Whatsapp Bot
 ```
 Add this no to your contacts: +14155238886 
-Message "  join apart-then "
+Message "join apart-then" to join the organization sandbox
 Then Type "Hi"
 ```
 ``` 
