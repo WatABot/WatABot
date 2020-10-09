@@ -75,6 +75,8 @@ Then Type "Hi"
    Description: Contact authorities/team to get help.
    Output: Sends contact information.
 ```
+Flask Dashboard Demo: http://watabot.centralus.cloudapp.azure.com
+
 
 For further documentation refer to : [Documentation!](https://github.com/WatABot/WatABot/blob/master/Assam%20Police%20Hackathon%20Documentaion.pdf)
 > **_NOTE:_** 
