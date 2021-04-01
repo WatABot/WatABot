@@ -1,6 +1,6 @@
 <p align="center">
  <img width="200px" src="https://avatars0.githubusercontent.com/u/71754745?s=400&u=eb42f9020f213811c28ae3ef4948bf088d22890f&v=4" align="center" alt="WatABot" />
- <h2 align="center">WatABot: Whatsapp Buisness bot implementation using twilio and flask.</h2>
+ <h2 align="center">WatABot: Whatsapp business bot implementation using twilio and flask.</h2>
 </p>
 
 <p align="center">
