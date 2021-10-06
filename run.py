@@ -65,7 +65,7 @@ def sms_reply():
         final = module_fakenews.run(str(news))
         print(final)
         accuracy = final[0][1]
-        print(accuracy)
+        #print(accuracy)
         accuracy_rounded = round(accuracy, 2)
         print(accuracy_rounded) 
         if accuracy_rounded >= 0.8:
@@ -82,7 +82,7 @@ def sms_reply():
             cur = con.cursor()
             con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, news, str(round(accuracy_rounded*100, 2)) +'%', final_result, today_date))
             con.commit()
-            print("Query Executed successfully")
+            #print("Query Executed successfully")
         return str(resp)
 
     if '!link' in msg:
@@ -92,12 +92,12 @@ def sms_reply():
         if 'http' not in news:
             message = client.messages.create(body="Link is not valid",from_='whatsapp:+14155238886',to= num)
             return str(resp)
-        print(news)
+        #print(news)
         news = module_newslink.scrape_article(news)
         final = module_fakenews.run(str(news))
-        print(final)
+        #print(final)
         accuracy = final[0][1]
-        print(accuracy)
+        #print(accuracy)
         accuracy_rounded = round(accuracy, 2)
         print(accuracy_rounded) 
         if accuracy_rounded >= 0.8:
@@ -114,14 +114,14 @@ def sms_reply():
             cur = con.cursor()
             con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, link + '\n' + news, str(round(accuracy_rounded*100, 2)) +'%', final_result, today_date))
             con.commit()
-            print("Query Executed successfully")
+            #print("Query Executed successfully")
         return str(resp)
     elif '!contact' == msg:
         with sql.connect("database.db") as con:
             cur = con.cursor()
             con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Contact Details', today_date))
             con.commit()
-            print("Query Executed successfully")
+            #print("Query Executed successfully")
         message = client.messages.create(body = 'Created by CyberBots Team @ Assam Police Hackathon. \n*Team:* Kiran Babu Muddam, Sumit Sah, Kaustubh Sharma, Nisarg shah',from_='whatsapp:+14155238886',to= num)
         return str(resp)
     elif '!alerts' == msg:
@@ -129,7 +129,7 @@ def sms_reply():
             cur = con.cursor()
             con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Alert Results', today_date))
             con.commit()
-            print("Query Executed successfully")
+            #print("Query Executed successfully")
         message = client.messages.create(body = 'Alerts feature is currently under development. Please check later.',from_='whatsapp:+14155238886',to = num)
         return str(resp)
     elif '!help' in msg:
@@ -137,7 +137,7 @@ def sms_reply():
             cur = con.cursor()
             con.execute('INSERT INTO reports (mobile, query, accuracy, result, date) VALUES (?,?,?,?,?)',(num, msg, 'Not Applicable', 'Usage Details', today_date))
             con.commit()
-            print("Query Executed successfully")
+            #print("Query Executed successfully")
         resp.message(''' 
 *ℹ️ Bot Usage Instructions & Guide*
 
